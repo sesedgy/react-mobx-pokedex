@@ -144,17 +144,15 @@ class PokemonList extends Component {
         <div>
           <div className="pokemons-list__controls-container">
             <Grid container>
-              <Grid item xs={6} md={3}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   className="pokemons-list__control"
-                  label="Filter by name"
+                  label="Name"
                   value={searchName}
                   onChange={(e) => {
                     this.filterByName(e.target.value);
                   }}
                 />
-              </Grid>
-              <Grid item xs={6} md={3}>
                 <FormControl>
                   <InputLabel htmlFor="select-multiple-checkbox">Type</InputLabel>
                   <Select
