@@ -9,6 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Select from '@material-ui/core/Select/Select';
 import TextField from '@material-ui/core/TextField/TextField';
 import Grid from '@material-ui/core/Grid/Grid';
+import ChipInput from 'material-ui-chip-input';
 import PokemonCard from '../PokemonCard/index';
 import './styles.css';
 
@@ -27,7 +28,7 @@ class PokemonList extends Component {
       filteringMode: filteringModes.byPage,
       // selectedPokemon: {},
       searchName: '',
-      searchTypes: [],
+      searchTypes: ['poison', 'grass'],
     };
 
     static getDerivedStateFromProps(props, state) {
@@ -125,7 +126,7 @@ class PokemonList extends Component {
       const {
         searchName, searchTypes, pageSize, pageNumber, pagesCount,
       } = this.state;
-      const { appState, pokemonsList } = this.props;
+      const { pokemonsList } = this.props;
       return (
         <div>
           <div className="pokemons-list__controls-container">
@@ -140,18 +141,11 @@ class PokemonList extends Component {
                   }}
                 />
                 <FormControl className="pokemons-list__control">
-                  <InputLabel>Type</InputLabel>
-                  <Select
-                    native
-                    value={searchTypes.length > 0 ? searchTypes[0] : ''}
-                    onChange={(e) => {
-                      this.filterByType(e.target.value);
-                    }}
-                  >
-                    <option value={null}>Select</option>
-                    {appState && appState.typesUrlsList
-                      .map(type => <option key={type.url} value={type.url}>{type.name}</option>)}
-                  </Select>
+                  <ChipInput
+                    value={searchTypes}
+                    // dataSourceConfig={{ text: 'name', value: 'url' }}
+                    onChange={(chips) => { this.filterByType(chips); }}
+                  />
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={6}>
