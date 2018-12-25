@@ -52,10 +52,12 @@ class PokemonsFilteredList {
   }
 
   @action
-  async filterByType(typeUrls, offset, limit) {
+  async filterByType(typeNames, offset, limit) {
     loaderStore.show();
     let pokemonsUrlsList = [];
-    const typesPromisesList = typeUrls.map(url => ApiService.getByFullUrl(url));
+    const typeUrlsList = typeNames
+      .map(name => appState.typesUrlsList.find(type => type.name === name).url);
+    const typesPromisesList = typeUrlsList.map(url => ApiService.getByFullUrl(url));
     const typesList = await ApiService.getList(typesPromisesList);
     typesList.forEach((type) => {
       type.pokemon.forEach((pokemon) => {
