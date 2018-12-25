@@ -1,7 +1,21 @@
-.pokemons-list_pokemons-container{
+.pokemons-list__pokemons-container{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     width: 100%;
     text-align: center;
+}
+
+
+.pokemons-list__controls-container {
+    text-align: center;
+    padding: 10px 15px 0 15px;
+}
+
+.pokemons-list__page-button {
+    margin: 0 10px !important;
+}
+
+.pokemons-list__control{
+    margin: 0 10px !important;
 }

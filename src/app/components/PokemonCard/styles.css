@@ -1,4 +1,18 @@
-.pokemon-card_container{
+.pokemon-card__container{
     max-width: 345px;
     margin: 15px;
+    min-width: 300px;
+}
+
+.pokemon-card__media{
+    background-size: 50% !important;
+    height: 150px;
+}
+
+.pokemon-card__chips-container{
+    margin-top: 5px;
+}
+
+.pokemon-card__chip{
+    margin: 0 5px;
 }

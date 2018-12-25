@@ -1,11 +1,13 @@
 .loader-overlay {
-    position: absolute;
-    width: 100%;
-    height: calc(100% - 64px);
-    background-color: rgba(0, 0, 0, 0.35);
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 64px);
+    top: 64px;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 2;
 }
 
 .loader {

@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import FormControl from '@material-ui/core/FormControl/FormControl';
+import InputLabel from '@material-ui/core/InputLabel/InputLabel';
+import Select from '@material-ui/core/Select/Select';
+import TextField from '@material-ui/core/TextField/TextField';
+import Grid from '@material-ui/core/Grid/Grid';
 import PokemonCard from '../PokemonCard/index';
 import './styles.css';
 
@@ -96,8 +104,12 @@ class PokemonList extends Component {
     }
 
     filterByName(value) {
-      const { pageSize } = this.state;
+      const { pageOffset, pageSize } = this.state;
       const { pokemonsFilter } = this.props;
+      if (value === '') {
+        pokemonsFilter.filterByPageOnServer(pageOffset, pageSize);
+        return;
+      }
       this.setState({ searchName: value, filteringMode: filteringModes.byName, pageNumber: 1 });
       pokemonsFilter.filterByName(value, 0, pageSize);
     }
@@ -116,42 +128,60 @@ class PokemonList extends Component {
       const { appState, pokemonsList } = this.props;
       return (
         <div>
-          <input
-            value={searchName}
-            onChange={(e) => {
-              this.filterByName(e.target.value);
-            }}
-          />
-          <select
-            value={searchTypes.length > 0 ? searchTypes[0] : ''}
-            onChange={(e) => {
-              this.filterByType(e.target.value);
-            }}
-          >
-            {appState
-            && appState.typesUrlsList
-              .map(type => <option key={type.url} value={type.url}>{type.name}</option>)}
-          </select>
-          <select
-            value={pageSize}
-            onChange={(e) => {
-              this.changePageSize(e.target.value);
-            }}
-          >
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={15}>15</option>
-          </select>
-          <div>
-            <button type="button" onClick={() => { this.changePage(pageNumber - 1); }}>Previous</button>
-            {' '}
-            {`${pageNumber}/${pagesCount}`}
-            {' '}
-            <button type="button" onClick={() => { this.changePage(pageNumber + 1); }}>Next</button>
+          <div className="pokemons-list__controls-container">
+            <Grid container>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  className="pokemons-list__control"
+                  label="Filter by name"
+                  value={searchName}
+                  onChange={(e) => {
+                    this.filterByName(e.target.value);
+                  }}
+                />
+                <FormControl className="pokemons-list__control">
+                  <InputLabel>Type</InputLabel>
+                  <Select
+                    native
+                    value={searchTypes.length > 0 ? searchTypes[0] : ''}
+                    onChange={(e) => {
+                      this.filterByType(e.target.value);
+                    }}
+                  >
+                    <option value={null}>Select</option>
+                    {appState && appState.typesUrlsList
+                      .map(type => <option key={type.url} value={type.url}>{type.name}</option>)}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <IconButton className="pokemons-list__page-button" onClick={() => { this.changePage(pageNumber - 1); }} disabled={pageNumber === 1}>
+                  <ChevronLeftIcon />
+                </IconButton>
+                {`${pageNumber}/${pagesCount}`}
+                <IconButton className="pokemons-list__page-button" onClick={() => { this.changePage(pageNumber + 1); }} disabled={pageNumber === pagesCount}>
+                  <ChevronRightIcon />
+                </IconButton>
+                <FormControl className="pokemons-list__control">
+                  <InputLabel>Count</InputLabel>
+                  <Select
+                    native
+                    value={pageSize}
+                    onChange={(e) => {
+                      this.changePageSize(e.target.value);
+                    }}
+                  >
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={15}>15</option>
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
           </div>
-          <div className="pokemons-list_pokemons-container">
+          <div className="pokemons-list__pokemons-container">
             {pokemonsList
-                && pokemonsList.map(pokemon => <PokemonCard pokemon={pokemon} />)}
+                && pokemonsList.map(pokemon => <PokemonCard key={pokemon.id} pokemon={pokemon} />)}
           </div>
         </div>
       );

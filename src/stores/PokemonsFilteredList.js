@@ -35,7 +35,6 @@ class PokemonsFilteredList {
   @action
   async filterByName(name, offset, limit) {
     loaderStore.show();
-
     let promisesList = [];
     let filteredPokemonsNumbers = [];
     const nameLowerCase = name.toLowerCase();
@@ -55,7 +54,6 @@ class PokemonsFilteredList {
   @action
   async filterByType(typeUrls, offset, limit) {
     loaderStore.show();
-
     let pokemonsUrlsList = [];
     const typesPromisesList = typeUrls.map(url => ApiService.getByFullUrl(url));
     const typesList = await ApiService.getList(typesPromisesList);
