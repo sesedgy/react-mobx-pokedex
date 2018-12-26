@@ -8,7 +8,6 @@ import FormControl from '@material-ui/core/FormControl/FormControl';
 import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Select from '@material-ui/core/Select/Select';
 import TextField from '@material-ui/core/TextField/TextField';
-import Grid from '@material-ui/core/Grid/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -143,68 +142,66 @@ class PokemonList extends Component {
       return (
         <div>
           <div className="pokemons-list__controls-container">
-            <Grid container>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  className="pokemons-list__control"
-                  label="Name"
-                  value={searchName}
+            <div className="pokemons-list__filter-controls-container">
+              <TextField
+                className="pokemons-list__control"
+                label="Name"
+                value={searchName}
+                onChange={(e) => {
+                  this.filterByName(e.target.value);
+                }}
+              />
+              <FormControl className="pokemons-list__control">
+                <InputLabel htmlFor="select-multiple-checkbox">Type</InputLabel>
+                <Select
+                  multiple
+                  value={searchTypes}
                   onChange={(e) => {
-                    this.filterByName(e.target.value);
+                    this.filterByType(e.target.value);
                   }}
-                />
-                <FormControl className="pokemons-list__control">
-                  <InputLabel htmlFor="select-multiple-checkbox">Type</InputLabel>
-                  <Select
-                    multiple
-                    value={searchTypes}
-                    onChange={(e) => {
-                      this.filterByType(e.target.value);
-                    }}
-                    input={<Input />}
-                    renderValue={selected => selected.join(', ')}
-                    MenuProps={{
-                      PaperProps: {
-                        style: {
-                          maxHeight: 48 * 4.5 + 8,
-                          width: 250,
-                        },
+                  input={<Input />}
+                  renderValue={selected => selected.join(', ')}
+                  MenuProps={{
+                    PaperProps: {
+                      style: {
+                        maxHeight: 48 * 4.5 + 8,
+                        width: 250,
                       },
-                    }}
-                  >
-                    {appState.typesUrlsList.map(type => (
-                      <MenuItem key={type.name} value={type.name}>
-                        <Checkbox checked={searchTypes.indexOf(type.name) > -1} />
-                        <ListItemText primary={type.name} />
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <FormControl className="pokemons-list__control">
-                  <InputLabel>Count</InputLabel>
-                  <Select
-                    native
-                    value={pageSize}
-                    onChange={(e) => {
-                      this.changePageSize(e.target.value);
-                    }}
-                  >
-                    <option value={5}>5</option>
-                    <option value={10}>10</option>
-                    <option value={15}>15</option>
-                  </Select>
-                </FormControl>
-                <IconButton className="pokemons-list__page-button" onClick={() => { this.changePage(pageNumber - 1); }} disabled={pageNumber === 1}>
-                  <ChevronLeftIcon />
-                </IconButton>
-                {`${pageNumber}/${pagesCount}`}
-                <IconButton className="pokemons-list__page-button" onClick={() => { this.changePage(pageNumber + 1); }} disabled={pageNumber === pagesCount}>
-                  <ChevronRightIcon />
-                </IconButton>
-              </Grid>
-            </Grid>
+                    },
+                  }}
+                >
+                  {appState.typesUrlsList.map(type => (
+                    <MenuItem key={type.name} value={type.name}>
+                      <Checkbox checked={searchTypes.indexOf(type.name) > -1} />
+                      <ListItemText primary={type.name} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <div className="pokemons-list__page-controls-container">
+              <IconButton className="pokemons-list__page-button" onClick={() => { this.changePage(pageNumber - 1); }} disabled={pageNumber === 1}>
+                <ChevronLeftIcon />
+              </IconButton>
+              {`${pageNumber}/${pagesCount}`}
+              <IconButton className="pokemons-list__page-button" onClick={() => { this.changePage(pageNumber + 1); }} disabled={pageNumber === pagesCount}>
+                <ChevronRightIcon />
+              </IconButton>
+              <FormControl>
+                <InputLabel>Count</InputLabel>
+                <Select
+                  native
+                  value={pageSize}
+                  onChange={(e) => {
+                    this.changePageSize(e.target.value);
+                  }}
+                >
+                  <option value={5}>5</option>
+                  <option value={10}>10</option>
+                  <option value={15}>15</option>
+                </Select>
+              </FormControl>
+            </div>
           </div>
           <div className="pokemons-list__pokemons-container">
             {pokemonsList

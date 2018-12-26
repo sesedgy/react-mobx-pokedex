@@ -2,14 +2,40 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    width: 100%;
+    width: calc(100% - 100px);
     text-align: center;
+    margin: auto;
+    max-width: 1650px;
 }
 
 
 .pokemons-list__controls-container {
     text-align: center;
-    padding: 10px 15px 0 15px;
+    padding-top: 10px;
+    max-width: 1620px;
+    margin: auto;
+    width: calc(100% - 100px);
+}
+
+@media screen and (max-width: 1750px) {
+    .pokemons-list__pokemons-container {
+        width: 100%
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .pokemons-list__controls-container {
+        width: calc(100% - 20px)
+    }
+}
+
+
+.pokemons-list__page-controls-container {
+    float: right;
+}
+
+.pokemons-list__filter-controls-container {
+    float: left;
 }
 
 .pokemons-list__page-button {
