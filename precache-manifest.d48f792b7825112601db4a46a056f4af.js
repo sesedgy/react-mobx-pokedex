@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/react-mobx-pokedex/static/js/runtime~main.a59287b2.js"
   },
   {
-    "revision": "d893dccc6c46d2b609b2",
-    "url": "/react-mobx-pokedex/static/js/main.d893dccc.chunk.js"
+    "revision": "c315b2cf17fb9b0c3c1d",
+    "url": "/react-mobx-pokedex/static/js/main.c315b2cf.chunk.js"
   },
   {
     "revision": "feba8aa4d6191043a8fb",
     "url": "/react-mobx-pokedex/static/js/1.feba8aa4.chunk.js"
   },
   {
-    "revision": "d893dccc6c46d2b609b2",
-    "url": "/react-mobx-pokedex/static/css/main.a3f33c33.chunk.css"
+    "revision": "c315b2cf17fb9b0c3c1d",
+    "url": "/react-mobx-pokedex/static/css/main.fe38a243.chunk.css"
   },
   {
-    "revision": "f0930c2d8ebef82b09f451ed9e7746f9",
+    "revision": "c0a75604745685847fb4c7ef84c748e7",
     "url": "/react-mobx-pokedex/index.html"
   }
 ];
