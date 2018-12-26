@@ -35,7 +35,7 @@ const PokemonCard = ({ pokemon }) => {
             {`Weight: ${pokemon.weight / 10} kg`}
           </Typography>
           <div className="pokemon-card__chips-container">
-            {pokemon.types.map(type => <Chip key={type.type.name} label={type.type.name} className="pokemon-card__chip" />)}
+            {pokemon.types.map(type => <Chip key={type.type.name} label={type.type.name} className={`pokemon-card__chip ${type.type.name}`} />)}
           </div>
         </CardContent>
       </CardActionArea>

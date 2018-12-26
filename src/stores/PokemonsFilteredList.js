@@ -1,5 +1,4 @@
 import { observable, action } from 'mobx';
-import { API_PATHS } from '../constants';
 import ApiService from '../services/apiService';
 import appState from './AppState';
 import loaderStore from './LoaderStore';
@@ -35,18 +34,17 @@ class PokemonsFilteredList {
   @action
   async filterByName(name, offset, limit) {
     loaderStore.show();
-    let promisesList = [];
-    let filteredPokemonsNumbers = [];
+    let filteredPokemonUrls = [];
     const nameLowerCase = name.toLowerCase();
-    appState.pokemonsUrlsList.forEach((item, index) => {
+    appState.pokemonsUrlsList.forEach((item) => {
       if (item.name.toLowerCase().indexOf(nameLowerCase) === 0) {
-        filteredPokemonsNumbers.push(index + 1);
+        filteredPokemonUrls.push(item.url);
       }
     });
-    this.filteredUrlsListLength = filteredPokemonsNumbers.length;
-    filteredPokemonsNumbers = PokemonsFilteredList
-      .filterByPage(filteredPokemonsNumbers, offset, limit);
-    promisesList = filteredPokemonsNumbers.map(number => ApiService.get(`${API_PATHS.GET.POKEMONS_LIST}/${number}`));
+    this.filteredUrlsListLength = filteredPokemonUrls.length;
+    filteredPokemonUrls = PokemonsFilteredList
+      .filterByPage(filteredPokemonUrls, offset, limit);
+    const promisesList = filteredPokemonUrls.map(url => ApiService.getByFullUrl(url));
     this.list = await ApiService.getList(promisesList);
     loaderStore.hide();
   }

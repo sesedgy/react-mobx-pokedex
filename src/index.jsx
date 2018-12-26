@@ -14,7 +14,7 @@ const startApp = async () => {
   const stores = { appState, loaderStore, pokemonsFilteredList };
   ReactDOM.render(
     <Provider {...stores}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <App />
       </BrowserRouter>
     </Provider>,

@@ -153,7 +153,7 @@ class PokemonList extends Component {
                     this.filterByName(e.target.value);
                   }}
                 />
-                <FormControl>
+                <FormControl className="pokemons-list__control">
                   <InputLabel htmlFor="select-multiple-checkbox">Type</InputLabel>
                   <Select
                     multiple

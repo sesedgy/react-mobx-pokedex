@@ -18,4 +18,5 @@
 
 .pokemons-list__control{
     margin-right: 10px !important;
+    min-width: 70px !important;
 }

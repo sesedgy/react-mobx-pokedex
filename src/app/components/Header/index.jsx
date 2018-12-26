@@ -29,7 +29,7 @@ const Header = (props) => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.title}>
-            <Link to="/" className={classes.logo}>
+            <Link to={`${process.env.PUBLIC_URL}/`} className={classes.logo}>
                   Pokedex
             </Link>
           </Typography>
