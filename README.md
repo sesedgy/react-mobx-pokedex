@@ -2,6 +2,7 @@
 Затраченное время: ~ 10 часов
 
 React + mobx
+
 API: https://pokeapi.co/ (v2)
 
 [Demo](https://sesedgy.github.io/react-mobx-pokedex/)
