@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -21,7 +20,7 @@ const filteringModes = {
   byType: 3,
 };
 
-class PokemonList extends Component {
+class PokemonList extends PureComponent {
     state = {
       pageOffset: 0,
       pageNumber: 1,
@@ -218,4 +217,4 @@ PokemonList.propTypes = {
   pokemonsList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-export default withRouter(PokemonList);
+export default PokemonList;

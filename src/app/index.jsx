@@ -1,21 +1,28 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/Header';
-import HomePage from './pages/HomePage/index';
-import PokemonPage from './pages/PokemonPage/index';
 import Loader from './components/Loader/index';
+import routes from './routes';
 
 const App = () => (
   <div>
     <Header />
     <div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/pokemon/:pokemon/" component={PokemonPage} />
+        {routes.map(
+          ({ path, exact, component }) => (
+            <Route
+              key={path}
+              exact={exact}
+              path={path}
+              component={component}
+            />
+          ),
+        )}
       </Switch>
       <Loader />
     </div>
   </div>
 );
 
-export default App;
+export default withRouter(App);

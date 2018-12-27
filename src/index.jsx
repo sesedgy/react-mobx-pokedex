@@ -6,12 +6,15 @@ import App from './app/index';
 import appState from './stores/AppState';
 import loaderStore from './stores/LoaderStore';
 import pokemonsFilteredList from './stores/PokemonsFilteredList';
+import pokemonProfileStore from './stores/PokemonProfileStore';
 
 import './index.css';
 
 const startApp = async () => {
   await appState.initAppState();
-  const stores = { appState, loaderStore, pokemonsFilteredList };
+  const stores = {
+    appState, loaderStore, pokemonsFilteredList, pokemonProfileStore,
+  };
   ReactDOM.render(
     <Provider {...stores}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>

@@ -1,0 +1,53 @@
+.pokemon-profile__container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.pokemon-profile__media{
+    background-size: 60% !important;
+    height: 240px;
+}
+
+
+.pokemon-profile__left-column-container{
+    width: 350px;
+}
+.pokemon-profile__right-column-container{
+    max-width: 630px;
+}
+
+
+.pokemon-profile__paper-heading{
+    margin-bottom: 10px !important;
+}
+.pokemon-profile__paper-container{
+    margin: 15px;
+    padding: 16px;
+}
+
+
+.pokemon-profile__detail-container{
+    height: 20px;
+    margin: 3px 0;
+}
+.pokemon-profile__detail-title{
+    width: 50%;
+    float: left;
+}
+.pokemon-profile__detail-text{
+    width: 50%;
+    float: right;
+}
+
+
+.pokemon-profile__stat-container{
+    margin: 8px 0;
+}
+
+
+.pokemon-profile__sprite{
+    width: 140px;
+}

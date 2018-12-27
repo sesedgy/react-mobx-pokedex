@@ -8,29 +8,37 @@ const instance = axios.create({
 });
 
 class ApiService {
-  static get(path) {
+  static getPromise(path) {
     return instance.get(`/${path}`);
   }
 
-  static post(path, requestBody) {
+  static postPromise(path, requestBody) {
     return instance.post(`/${path}`, requestBody);
   }
 
-  static getByFullUrl(url) {
+  static getPromiseByFullUrl(url) {
     return axios.get(url);
   }
 
-  static async getList(promisesList) {
-    loaderStore.show();
+  static async getResultsList(promisesList) {
     let resultsList = [];
     await Promise.all(promisesList).then((results) => {
       resultsList = results.map(result => result.data);
-      loaderStore.hide();
     }).catch(() => {
-      loaderStore.hide();
       // TODO обработка ошибок
     });
     return resultsList;
+  }
+
+  static async getResult(promise) {
+    let requestResult = null;
+    await promise.then((result) => {
+      requestResult = result.data;
+      loaderStore.hide();
+    }).catch(() => {
+      // TODO обработка ошибок
+    });
+    return requestResult;
   }
 }
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import PokemonList from '../../components/PokemonList';
+import PokemonProfile from '../../components/PokemonProfile';
 
-const PokemonPage = inject('appState', 'pokemonsFilteredList')(observer(({ appState, pokemonsFilteredList }) => (
-  <PokemonList appState={appState} pokemonsFilteredList={pokemonsFilteredList} />
+const PokemonPage = inject('pokemonProfileStore')(observer(({ pokemonProfileStore }) => (
+  <PokemonProfile pokemonProfileStore={pokemonProfileStore} pokemon={pokemonProfileStore.pokemon} />
 )));
 
 export default PokemonPage;

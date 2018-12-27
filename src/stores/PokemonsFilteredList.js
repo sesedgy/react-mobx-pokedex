@@ -25,9 +25,9 @@ class PokemonsFilteredList {
     const newOffset = Number(offset);
     const newLimit = Number(limit) + newOffset;
     for (let i = newOffset; i < newLimit; i += 1) {
-      promisesList.push(ApiService.getByFullUrl(appState.pokemonsUrlsList[i].url));
+      promisesList.push(ApiService.getPromiseByFullUrl(appState.pokemonsUrlsList[i].url));
     }
-    this.list = await ApiService.getList(promisesList);
+    this.list = await ApiService.getResultsList(promisesList);
     loaderStore.hide();
   }
 
@@ -44,8 +44,8 @@ class PokemonsFilteredList {
     this.filteredUrlsListLength = filteredPokemonUrls.length;
     filteredPokemonUrls = PokemonsFilteredList
       .filterByPage(filteredPokemonUrls, offset, limit);
-    const promisesList = filteredPokemonUrls.map(url => ApiService.getByFullUrl(url));
-    this.list = await ApiService.getList(promisesList);
+    const promisesList = filteredPokemonUrls.map(url => ApiService.getPromiseByFullUrl(url));
+    this.list = await ApiService.getResultsList(promisesList);
     loaderStore.hide();
   }
 
@@ -55,8 +55,8 @@ class PokemonsFilteredList {
     let pokemonsUrlsList = [];
     const typeUrlsList = typeNames
       .map(name => appState.typesUrlsList.find(type => type.name === name).url);
-    const typesPromisesList = typeUrlsList.map(url => ApiService.getByFullUrl(url));
-    const typesList = await ApiService.getList(typesPromisesList);
+    const typesPromisesList = typeUrlsList.map(url => ApiService.getPromiseByFullUrl(url));
+    const typesList = await ApiService.getResultsList(typesPromisesList);
     typesList.forEach((type) => {
       type.pokemon.forEach((pokemon) => {
         pokemonsUrlsList.push(pokemon.pokemon.url);
@@ -64,8 +64,8 @@ class PokemonsFilteredList {
     });
     this.filteredUrlsListLength = pokemonsUrlsList.length;
     pokemonsUrlsList = PokemonsFilteredList.filterByPage(pokemonsUrlsList, offset, limit);
-    const pokemonsPromisesList = pokemonsUrlsList.map(url => ApiService.getByFullUrl(url));
-    this.list = await ApiService.getList(pokemonsPromisesList);
+    const pokemonsPromisesList = pokemonsUrlsList.map(url => ApiService.getPromiseByFullUrl(url));
+    this.list = await ApiService.getResultsList(pokemonsPromisesList);
     loaderStore.hide();
   }
 }
