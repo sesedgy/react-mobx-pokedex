@@ -1,4 +1,6 @@
-import { observable, computed, action } from 'mobx';
+import {
+  observable, computed, action, flow,
+} from 'mobx';
 import { API_PATHS } from '../constants';
 import ApiService from '../services/apiService';
 import loaderStore from './LoaderStore';
@@ -11,15 +13,15 @@ class AppState {
   typesUrlsList = [];
 
   @action
-  async initAppState() {
+  initAppState = flow(function* initAppState() {
     loaderStore.show();
     const promisesList = [ApiService.getPromise(API_PATHS.GET.POKEMONS_FULL_LIST),
       ApiService.getPromise(API_PATHS.GET.TYPES_LIST)];
-    const results = await ApiService.getResultsList(promisesList);
+    const results = yield ApiService.getResultsList(promisesList);
     this.pokemonsUrlsList = results[0].results;
     this.typesUrlsList = results[1].results;
     loaderStore.hide();
-  }
+  });
 
   @computed
   get pokemonsCount() {

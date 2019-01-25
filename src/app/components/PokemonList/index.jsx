@@ -86,19 +86,20 @@ class PokemonList extends PureComponent {
         filteringMode, searchName, searchTypes, pageNumber,
       } = this.state;
       const { pokemonsFilter } = this.props;
-      const newPageOffset = (pageNumber - 1) * value;
+      const newPageSize = Number(value);
+      const newPageOffset = (pageNumber - 1) * newPageSize;
       this.setState(prevState => (
-        { pageSize: value, pagesCount: PokemonList.getPagesCount(this.props, prevState) }
+        { pageSize: newPageSize, pagesCount: PokemonList.getPagesCount(this.props, prevState) }
       ));
       switch (filteringMode) {
         case 1:
-          pokemonsFilter.filterByPageOnServer(newPageOffset, value);
+          pokemonsFilter.filterByPageOnServer(newPageOffset, newPageSize);
           break;
         case 2:
-          pokemonsFilter.filterByName(searchName, newPageOffset, value);
+          pokemonsFilter.filterByName(searchName, newPageOffset, newPageSize);
           break;
         case 3:
-          pokemonsFilter.filterByType(searchTypes, newPageOffset, value);
+          pokemonsFilter.filterByType(searchTypes, newPageOffset, newPageSize);
           break;
         default:
           break;

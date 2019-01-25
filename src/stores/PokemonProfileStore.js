@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, flow } from 'mobx';
 import ApiService from '../services/apiService';
 import loaderStore from './LoaderStore';
 import { API_PATHS } from '../constants';
@@ -12,11 +12,11 @@ class PokemonProfileStore {
     pokemon;
 
     @action
-    async getPokemon(name) {
+    getPokemon = flow(function* getPokemon(name) {
       loaderStore.show();
-      this.pokemon = await ApiService.getResult(ApiService.getPromise(`${API_PATHS.GET.POKEMONS_LIST}/${name}`));
+      this.pokemon = yield ApiService.getResult(ApiService.getPromise(`${API_PATHS.GET.POKEMONS_LIST}/${name}`));
       loaderStore.hide();
-    }
+    });
 }
 
 const pokemonsFilteredList = new PokemonProfileStore();
