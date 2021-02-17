@@ -24,7 +24,7 @@ class PokemonProfile extends PureComponent {
     const pokemonNumber = filler.substring(0, filler.length - idString.length) + idString;
     const pokemonSprites = [];
     Object.keys(pokemon.sprites).forEach((key) => {
-      if (pokemon.sprites[key]) {
+      if (pokemon.sprites[key] && typeof pokemon.sprites[key] === 'string') {
         pokemonSprites.push(pokemon.sprites[key]);
       }
     });
